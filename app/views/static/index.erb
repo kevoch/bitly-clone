@@ -5,7 +5,14 @@
 </form>
 
 
-<h1>Links</h1>
+
+<h1><span style="color: #3366ff;">Links</span></h1>
 <% @urls.each do |url| %>
-  <p><%= url.long_url %>,<%= "http://localhost:9393/" + url.short_url %></p>  
+<ul>
+
+  <li><p><em><%= url.long_url[0..60]+"..."  %></em>      <a href=<%= "http://localhost:9393/" + url.short_url%>> <%= "http://localhost:9393/" + url.short_url%> </a> <%="click =" + url.click_count.to_s%></p> </li>
+
+</ul>
+
+
 <% end %>

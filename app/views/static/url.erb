@@ -1,5 +1,5 @@
 
 <h1>Links</h1>
 <% @urls.each do |url| %>
-  <p><%= url.long_url %>, <%= "http//localhost:9393/" + url.short_url %></p>  
+  <p><%= url.long_url %>, <%= "http://localhost:9393/" + url.short_url + " "*4 + "click =" + url.click_count.to_s%></p>  
 <% end %>

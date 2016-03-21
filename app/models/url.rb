@@ -1,6 +1,8 @@
 class Url < ActiveRecord::Base
 	# This is Sinatra! Remember to create a migration!
 before_create :shorten
+validates :long_url, presence: true
+validates :short_url, uniqueness: true
 
   def shorten
 
@@ -14,4 +16,13 @@ before_create :shorten
     end
     
   end
+
+
+  def counter_plus
+
+    self.click_count += 1
+    self.save
+
+  end
+
 end

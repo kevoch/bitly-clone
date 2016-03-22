@@ -17,16 +17,22 @@ end
 
 post '/urls' do
  
-  url = Url.create(long_url: params[:long_url])
-  
-  @urls = Url.all
+  url = Url.new(long_url: params[:long_url])
+  if url.save
+    byebug
+    @urls = Url.all
+    redirect to "/"
+  else
+    @errors = url.errors.full_messages
+    erb :"static/error"
+  end
 
   # short_url = Url.shorten 
   # url.update(short_url: short_url)
   # redirect to '/'
  # @urls = Url.all
 
-  erb :"static/index"
+  
 end
 
 

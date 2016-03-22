@@ -3,6 +3,9 @@ class Url < ActiveRecord::Base
 before_create :shorten
 validates :long_url, presence: true
 validates :short_url, uniqueness: true
+validates :long_url, format: {with: /(http:\/\/|https:\/\/)([a-z].*)/, message: "input is invalid!"}
+
+
 
   def shorten
 

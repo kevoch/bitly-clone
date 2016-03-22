@@ -1,18 +1,42 @@
-<form action='/urls' method="post">
-    Enter URL:
-    <input type ="text" name="long_url">
-    <input type ="submit" value ="Submit">
-</form>
 
 
 
-<h1><span style="color: #3366ff;">Links</span></h1>
+  <p><span id="title"> <img src="http://fontmeme.com/embed.php?text=Bitly&name=Jennifer%20Lynne%20Bold.ttf&size=100&style_color=15155E" alt="bitly" style="width:220px;height:140px;"></span></p>
+
+
+
+ <div>
+  <span id="input-form">
+  <form action='/urls' method="post">
+      
+      
+      <input type ="text" placeholder="URL to be shorten..." required name="long_url">
+      <button type ="submit"  value ="Submit">Click me!</button>
+  </form></span>
+</div>
+
+
+
+<table>
+  <tr>
+    <th>Link</th>
+    <!-- <th>Bit.ly</th> -->
+    <th>Clicks</th>
+  </tr>
+
 <% @urls.each do |url| %>
-<ul>
+  <tr>
+    <td><em><%=url.long_url%></em></td>
+    <td rowspan="2"><%=url.click_count.to_s%></td>
+  </tr>
+  <tr>
+    <td><a href= <%= "http://localhost:9393/" + url.short_url%> target="_blank"> 
+    <%= "http://localhost:9393/" + url.short_url%></a></td> 
+  </tr>
+    
+ 
 
-  <li><p><em><%= url.long_url[0..60]+"..."  %></em>      <a href=<%= "http://localhost:9393/" + url.short_url%>> <%= "http://localhost:9393/" + url.short_url%> </a> <%="click =" + url.click_count.to_s%></p> </li>
-
-</ul>
 
 
 <% end %>
+</table>

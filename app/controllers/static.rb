@@ -19,7 +19,7 @@ post '/urls' do
  
   url = Url.new(long_url: params[:long_url])
   if url.save
-    byebug
+    
     @urls = Url.all
     redirect to "/"
   else

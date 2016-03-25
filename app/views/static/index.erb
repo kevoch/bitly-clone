@@ -57,8 +57,8 @@
     <td class ="tabledata" rowspan="2"><%=url.click_count.to_s%></td>
   </tr>
   <tr>
-    <td class ="tabledata"><a href= <%= "http://localhost:9393/" + url.short_url%> target="_blank"> 
-    <%= "http://localhost:9393/" + url.short_url%></a></td> 
+    <td class ="tabledata"><a href= <%= "https://kevbitly.herokuapp.com/" + url.short_url%> target="_blank"> 
+    <%= "https://kevbitly/" + url.short_url%></a></td> 
   </tr>
 <% end %>
 </table>
@@ -78,7 +78,7 @@ $("#input-form").submit(function(event){
         "<td class ='tabledata'><em>" + data['long_url'] + "<em></td>"
         + "<td class ='tabledata'><rowspan='2'>" + data["click_count"] + "</td></tr>"
         + "<tr>" 
-        + "<td class ='tabledata'><a href= http://localhost:9393/" + data['short_url'] + " >" + data['short_url'] + "</a></td></tr>");
+        + "<td class ='tabledata'><a href= https://kevbitly.herokuapp.com/" + data['short_url'] + " >" + data['short_url'] + "</a></td></tr>");
     },
     error:function(data){ 
    // show default error page
@@ -89,7 +89,7 @@ $("#input-form").submit(function(event){
 });
 
       
-      // $(".all_urls").append("<tr>"+ url.id+ "<td>" + url.long_url" </td>")
+     
 </script>
 
 

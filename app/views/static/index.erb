@@ -1,20 +1,25 @@
- 
+<p><span id="title"> <img src="http://fontmeme.com/embed.php?text=Bitly&name=Jennifer%20Lynne%20Bold.ttf&size=100&style_color=15155E" alt="bitly" style="width:220px;height:140px;"></span></p>
 
-
-  <p><span id="title"> <img src="http://fontmeme.com/embed.php?text=Bitly&name=Jennifer%20Lynne%20Bold.ttf&size=100&style_color=15155E" alt="bitly" style="width:220px;height:140px;"></span></p>
-
-
-
+<!-- form -->
  <div>
   <span id="input-form">
-  <div class="description">
-        <p>Search bar is ready. Please feed it with the links that you'd like to shorten.</p>
-      </div>
-  <form action='/urls' method="post">
-      <input class = "button" type ="text" placeholder="  URL to be shorten..." required name="long_url">
-      <input class = "button" id = "submit2" type ="submit"  value ="Submit">
-  </form></span>
+    <div class="description">
+      <p>Search bar is ready. Please feed it with the links that you'd like to shorten.</p>
+    </div>
+
+    <form action='/urls' method="post">
+        <input class = "button" type ="text"  name="long_url" placeholder="  URL to be shorten...">
+        <input class = "button" id = "submit2" type ="submit"  value ="Submit">
+    </form>
+  </span>
 </div>
+
+ <div id="error_board"></div>
+
+
+
+
+
   <h2 id="steps_title">Follow 3 easy steps!</h2> 
  <div id="steps">
 
@@ -35,7 +40,6 @@
         </div>
  </div>
 
- 
 
 
 
@@ -49,17 +53,53 @@
 
 <% @urls.each do |url| %>
   <tr>
-    <td><em><%=url.long_url%></em></td>
-    <td rowspan="2"><%=url.click_count.to_s%></td>
+    <td class ="tabledata"><em><%=url.long_url%></em></td>
+    <td class ="tabledata" rowspan="2"><%=url.click_count.to_s%></td>
   </tr>
   <tr>
-    <td><a href= <%= "http://localhost:9393/" + url.short_url%> target="_blank"> 
+    <td class ="tabledata"><a href= <%= "http://localhost:9393/" + url.short_url%> target="_blank"> 
     <%= "http://localhost:9393/" + url.short_url%></a></td> 
   </tr>
-    
- 
-
-
-
 <% end %>
 </table>
+
+<script>
+$("#input-form").submit(function(event){
+  event.preventDefault(); //this line itself prevent the submit button to go to the form directed url.. whcih 
+  var data = $(event.target).serialize();
+  $.ajax({
+    url : "urls",
+    type: "POST",
+    dataType: "JSON",
+    data: data,
+     // u turn the encoded json object to a serialized string format, "this" refers to the return result out from logic/method under post "/urls" under controllers/static.rb
+    success: function(data) {
+      $('table').append("<tr>" + 
+        "<td class ='tabledata'><em>" + data['long_url'] + "<em></td>"
+        + "<td class ='tabledata'><rowspan='2'>" + data["click_count"] + "</td></tr>"
+        + "<tr>" 
+        + "<td class ='tabledata'><a href= http://localhost:9393/" + data['short_url'] + " >" + data['short_url'] + "</a></td></tr>");
+    },
+    error:function(data){ 
+   // show default error page
+      window.location.assign("error");
+    
+    }
+  });
+});
+
+      
+      // $(".all_urls").append("<tr>"+ url.id+ "<td>" + url.long_url" </td>")
+</script>
+
+
+  <!-- // $.ajax({
+  //       type: "PUT",
+  //       url: "/games/" + gameId,
+  //       data: {"game_id": gameId, "player_num": player, "loser_index": loserIndex},
+  //       success: function(response) {
+  //         window.location = "/games/" + gameId;
+  //         },
+  //       error: function(request, errorType, errorMessage) {
+  //         alert('Error: ' + errorType + ' with message: ' + errorMessage)}
+ -->

@@ -130,7 +130,7 @@ th{
     color: white;
    
 }
-td{
+#tabledata{
     padding: 8.5px;
     border-bottom: 1px solid #ddd;
     opacity: 0.7;

@@ -4,9 +4,10 @@ class CreateUrls < ActiveRecord::Migration
       t.string :long_url
       t.string :short_url
       t.integer :click_count, default: 0
-      t.integer :user_id
+      
 
       t.timestamps
     end
+    add_index :urls, :short_url
 	end
 end
